@@ -4,14 +4,35 @@ namespace ConsoleApplication1
 {
     public class Hello
     {
-        private DateTime thisDateTime;
+        private int hour;
+        private int jourDeSemaine;
+        private DateTime ajd;
+        public DateTime ThisDateTime
+        {
+            set
+            {
+                hour = value.Hour;
+                jourDeSemaine = (int) value.DayOfWeek;
+                ajd = value;
+            }
+            get { return ajd; }
+        }
+
+        public int message
+        {
+            set { getHelloMessage();}
+            get { 
+                return 1;
+            }
+        }
+
         private int shiftStart;
         private int shiftEnd;
         private int afternoon;
         
         public Hello()
         {
-            thisDateTime = DateTime.Now;
+            ThisDateTime = DateTime.Now;
             shiftStart = 9;
             shiftEnd = 18;
             afternoon = 13;
@@ -19,7 +40,7 @@ namespace ConsoleApplication1
 
         public Hello(int start, int aprem, int end)
         {
-            thisDateTime = DateTime.Now;
+            ThisDateTime = DateTime.Now;
             shiftStart = start;
             shiftEnd = aprem;
             afternoon = end;
@@ -28,25 +49,25 @@ namespace ConsoleApplication1
         public void getHelloMessage()
         {
             
-            if (isWeekend(thisDateTime))
+            if (isWeekend(ThisDateTime))
             {
-                Console.WriteLine("Bon weekend "+Environment.UserName);
+                Console.Write("Bon weekend "+Environment.UserName+" ");
             }
-            else if (thisDateTime.Hour>shiftStart)
+            else if (hour>shiftStart)
             {
-                Console.WriteLine("Bonjour "+Environment.UserName);
+                Console.Write("Bonjour "+Environment.UserName+" ");
             }
-            else if (thisDateTime.Hour>afternoon)
+            else if (hour>afternoon)
             {
-                Console.WriteLine("Bon aprem "+Environment.UserName);
-            }else if (thisDateTime.Hour>shiftEnd)
+                Console.Write("Bon aprem "+Environment.UserName+" ");
+            }else if (hour>shiftEnd)
             {
-                Console.WriteLine("Bonne soirée "+Environment.UserName);
+                Console.Write("Bonne soirée "+Environment.UserName+" ");
             }
         }
         public bool isWeekend(DateTime day)
         {
-            return  (day.DayOfWeek==DayOfWeek.Saturday || day.DayOfWeek==DayOfWeek.Sunday|| (day.DayOfWeek == DayOfWeek.Friday && day.Hour > shiftEnd) ||
+            return  (day.DayOfWeek==DayOfWeek.Saturday || day.DayOfWeek==DayOfWeek.Sunday || (day.DayOfWeek == DayOfWeek.Friday && day.Hour > shiftEnd) ||
                                        (day.DayOfWeek == DayOfWeek.Monday && day.Hour < shiftStart));
         }
     }
