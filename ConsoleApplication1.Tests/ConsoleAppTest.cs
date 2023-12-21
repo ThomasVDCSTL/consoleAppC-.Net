@@ -22,5 +22,6 @@ namespace ConsoleApplication1.Tests
             Hello hello = new Hello(9, 9, 9, new FakeTime(new DateTime(2023, 12, 21, 10, 20, 20)));
             Assert.AreEqual("Bonsoir thomas.vandecasteele ", hello.getHelloMessage());
         }
+        
     }
 }
