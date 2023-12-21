@@ -17,52 +17,46 @@ namespace ConsoleApplication1
             }
             get { return ajd; }
         }
-
-        public int message
-        {
-            set { getHelloMessage();}
-            get { 
-                return 1;
-            }
-        }
+        
 
         private int shiftStart;
         private int shiftEnd;
         private int afternoon;
         
-        public Hello()
+        public Hello() 
+            : this(9,18,13)
         {
-            ThisDateTime = DateTime.Now;
-            shiftStart = 9;
-            shiftEnd = 18;
-            afternoon = 13;
         }
 
-        public Hello(int start, int aprem, int end)
+        public Hello(int start, int aprem, int end) 
+            : this(start,aprem,end, new Time())
         {
-            ThisDateTime = DateTime.Now;
+        }
+        public Hello(int start, int aprem, int end, iTime time)
+        {
+            ThisDateTime = time.getTime();
             shiftStart = start;
             shiftEnd = aprem;
             afternoon = end;
         }
 
-        public void getHelloMessage()
+        public string getHelloMessage()
         {
             
             if (isWeekend(ThisDateTime))
             {
-                Console.Write("Bon weekend "+Environment.UserName+" ");
+                return("Bon weekend "+Environment.UserName+" ");
             }
-            else if (hour>shiftStart)
+            else if (hour>shiftEnd)
             {
-                Console.Write("Bonjour "+Environment.UserName+" ");
+                return("Bonsoir "+Environment.UserName+" ");
             }
             else if (hour>afternoon)
             {
-                Console.Write("Bon aprem "+Environment.UserName+" ");
-            }else if (hour>shiftEnd)
+                return("Bon aprem "+Environment.UserName+" ");
+            }else 
             {
-                Console.Write("Bonne soirée "+Environment.UserName+" ");
+                return("Bonjour "+Environment.UserName+" ");
             }
         }
         public bool isWeekend(DateTime day)

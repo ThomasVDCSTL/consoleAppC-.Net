@@ -12,7 +12,7 @@ namespace ConsoleApplication1
             String input = "gufytfy,cfty,cfnycfybtydr";
             while (input!="exit")
             {
-                hello.message=1;
+                Console.WriteLine(hello.getHelloMessage());
                 input = Console.ReadLine();
             }
             Console.WriteLine("ORVOIR !");
